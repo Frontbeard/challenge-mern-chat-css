@@ -175,6 +175,24 @@ function App() {
 
       <div className="chat-container" ref={chatRef}>
         <div className="chat-content">
+          {messages.map((message, index) => (
+            <div
+              key={index}
+              className={`chat-message ${
+                message.from === nickname ? "own-message" : ""
+              }`}
+              style={{
+                backgroundColor:
+                  message.from === nickname
+                    ? "#cfefff"
+                    : getUserColor(message.from),
+              }}
+            >
+              <small className="message-text" style={{ color: "#000000" }}>
+                {message.from}: {message.body}
+              </small>
+            </div>
+          ))}
           {storedMessages.map((message, index) => (
             <div
               key={index}
@@ -195,24 +213,6 @@ function App() {
                 style={{ color: "#000000" }}
               >
                 {message.from}: {message.message}
-              </small>
-            </div>
-          ))}
-          {messages.map((message, index) => (
-            <div
-              key={index}
-              className={`chat-message ${
-                message.from === nickname ? "own-message" : ""
-              }`}
-              style={{
-                backgroundColor:
-                  message.from === nickname
-                    ? "#cfefff"
-                    : getUserColor(message.from),
-              }}
-            >
-              <small className="message-text" style={{ color: "#000000" }}>
-                {message.from}: {message.body}
               </small>
             </div>
           ))}
